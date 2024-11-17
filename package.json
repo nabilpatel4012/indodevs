@@ -1,0 +1,38 @@
+{
+  "name": "indodevs",
+  "version": "0.0.1",
+  "description": "Indodevs is a platform which enables developers to contribute to opensource projects and make the opensource space in India more accessible and user friendly for new Developers in India. It also enables users get compensated for the work/contributions and allow organizations/developers to setup bounties for developers. #indodevs",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx --watch src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "tsx src/migrate.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nabilpatel4012/indodevs.git"
+  },
+  "keywords": [
+    "open-source",
+    "development",
+    "bounty",
+    "prizes"
+  ],
+  "author": "Nabil Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nabilpatel4012/indodevs/issues"
+  },
+  "homepage": "https://github.com/nabilpatel4012/indodevs#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "kysely": "^0.27.4",
+    "mysql2": "^3.11.4"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
+    "typescript": "^5.6.3"
+  }
+}

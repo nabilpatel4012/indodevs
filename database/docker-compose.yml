@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  mysql-master:
+    image: mysql:8.0
+    container_name: mysql-master
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin@1234
+      MYSQL_REPLICATION_USER: repl_user
+      MYSQL_REPLICATION_PASSWORD: Secret@123
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - mysql-master-data:/var/lib/mysql
+    networks:
+      - mysql-network
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      retries: 3
+    command: --server-id=1 --log-bin=mysql-bin --binlog-do-db=mydb --bind-address=0.0.0.0
+    restart: unless-stopped
+
+  mysql-replica:
+    image: mysql:8.0
+    container_name: mysql-replica
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin@1234
+      MYSQL_REPLICATION_USER: repl_user
+      MYSQL_REPLICATION_PASSWORD: Secret@123
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - mysql-replica-data:/var/lib/mysql
+    networks:
+      - mysql-network
+    depends_on:
+      - mysql-master
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      retries: 3
+    command: --server-id=2 --log-bin=mysql-bin --relay-log=mysqld-relay-bin --read-only=1
+    restart: unless-stopped
+
+networks:
+  mysql-network:
+    driver: bridge
+
+volumes:
+  mysql-master-data:
+  mysql-replica-data:
