@@ -9,7 +9,7 @@ const dialect = new MysqlDialect({
     user: "root",
     password: "Admin@1234",
     port: 3306,
-    connectionLimit: 10,
+    connectionLimit: 20,
   }),
 });
 

@@ -31,8 +31,8 @@ export class UserService {
       .where("id", "=", id);
     return await query.executeTakeFirstOrThrow();
   }
-  static async getAllUsers() {
-    const query = db.selectFrom("person").selectAll();
+  static async getAllUsers(size: number, page: number) {
+    const query = db.selectFrom("person").selectAll().limit(size).offset(size*(page-1));
     return await query.execute();
   }
 }

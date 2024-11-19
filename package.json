@@ -6,7 +6,8 @@
   "scripts": {
     "start": "tsx --watch src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "tsx src/migrate.ts"
+    "migrate": "tsx src/migrate.ts",
+    "seed": "tsx database/seeders/seeder.ts"
   },
   "repository": {
     "type": "git",
@@ -25,12 +26,15 @@
   },
   "homepage": "https://github.com/nabilpatel4012/indodevs#readme",
   "dependencies": {
+    "@types/axios": "^0.14.4",
+    "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "kysely": "^0.27.4",
     "mysql2": "^3.11.4"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.2.0",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.0",
     "typescript": "^5.6.3"
