@@ -4,9 +4,11 @@ SHELL := /bin/bash
 # Set default target
 .DEFAULT_GOAL := help
 
+# Variables
+TSX := tsx
 
 # Targets
-server: ## Start the application with tsx --watch
+start: ## Start the application with tsx --watch
 	npm start | pino-pretty
 
 test: ## Run the test command
