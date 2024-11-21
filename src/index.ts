@@ -7,6 +7,12 @@ const PORT = 3000;
 app.use(express.json());
 app.use(Middlewares.logger);
 
+app.disable('X-Powered-By');
+app.use((req, res, next) => {
+  res.setHeader('X-Powered-By', 'NP ;)');
+  next();
+});
+
 app.get("/", (req, res) => {
   res.json({ message: "Hello World" }).status(202);
 });
