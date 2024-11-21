@@ -9,7 +9,7 @@ app.use(Middlewares.logger);
 
 app.disable('X-Powered-By');
 app.use((req, res, next) => {
-  res.setHeader('X-Powered-By', 'NP ;)');
+  res.setHeader('Powered-By', 'Indodevs ;)');
   next();
 });
 
