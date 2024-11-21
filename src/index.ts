@@ -7,7 +7,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(Middlewares.logger);
 
-app.disable('X-Powered-By');
+app.disable('x-powered-by');
 app.use((req, res, next) => {
   res.setHeader('Powered-By', 'Indodevs ;)');
   next();
