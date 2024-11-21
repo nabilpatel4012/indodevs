@@ -4,11 +4,11 @@ import { Middlewares } from "./middlewares";
 
 const app = express();
 const PORT = 3000;
-app.set('x-powered-by', false);  
+app.disable('X-Powered-By');
 app.use(express.json());
 app.use(Middlewares.logger);
 app.use((req, res, next) => {
-  res.setHeader('Powered-By', 'Indodevs ;)');
+  res.setHeader('X-Powered-By', 'Indodevs ;)');
   next();
 });
 
