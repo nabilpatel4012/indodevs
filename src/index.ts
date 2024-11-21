@@ -4,7 +4,7 @@ import { Middlewares } from "./middlewares";
 
 const app = express();
 const PORT = 3000;
-app.disable('x-powered-by');
+app.set('x-powered-by', false);  
 app.use(express.json());
 app.use(Middlewares.logger);
 app.use((req, res, next) => {
