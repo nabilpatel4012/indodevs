@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/nabilpatel4012/indodevs#readme",
   "dependencies": {
+    "@octokit/rest": "^21.0.2",
     "@types/axios": "^0.14.4",
     "@types/pino-http": "^5.8.4",
     "axios": "^1.7.7",
