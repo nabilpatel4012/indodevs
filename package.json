@@ -2,9 +2,9 @@
   "name": "indodevs",
   "version": "0.0.1",
   "description": "Indodevs is a platform which enables developers to contribute to opensource projects and make the opensource space in India more accessible and user friendly for new Developers in India. It also enables users get compensated for the work/contributions and allow organizations/developers to setup bounties for developers. #indodevs",
-  "main": "src/index.ts",
+  "main": "src/app.ts",
   "scripts": {
-    "start": "tsx --watch src/index.ts",
+    "start": "tsx --watch src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "tsx src/migrate.ts",
     "seed": "tsx database/seeders/seeder.ts"
@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/nabilpatel4012/indodevs#readme",
   "dependencies": {
+    "@octokit/request": "^9.1.3",
     "@octokit/rest": "^21.0.2",
     "@types/axios": "^0.14.4",
     "@types/pino-http": "^5.8.4",
