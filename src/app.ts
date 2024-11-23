@@ -1,44 +1,57 @@
-import express, { Request, Response } from "express";
-import { Controllers } from "./controllers";
+import express from "express";
+import compression from "compression";
+import zlib from "node:zlib";
+import apiRoutes from "./routes/v1"; // Import the index file from the routes folder
 import { Middlewares } from "./middlewares";
-import { octokit } from "./services/octokit/octokit.service";
-import { da } from "@faker-js/faker/.";
+import { db } from "./db/db"; // Example: Database initialization function
+import API_ROUTES from "./routes";
 
 const app = express();
 const PORT = 3000;
+
+// Global middleware
 app.disable("X-Powered-By");
-app.use(express.json());
-// app.use(Middlewares.logger);
 app.use((req, res, next) => {
   res.setHeader("X-Powered-By", "Indodevs ;)");
   next();
 });
+app.use(
+  compression({
+    level: 9,
+    threshold: 0,
+    filter: (req, res) => {
+      console.log(`Compressing: ${req.url}`);
+      return compression.filter(req, res);
+    },
+  })
+);
+app.use(express.json());
+app.use(Middlewares.logger);
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello World" }).status(202);
-});
+// Mount API routes
+app.use("/api", API_ROUTES); // Prefix all routes with /api
 
-app.post("/users", (req: Request, res: Response) => {
-  Controllers.userController.addUser(req.body, res);
-});
-app.get("/users/stats", (req: Request, res: Response) => {
-  Controllers.userController.getUserGenderPercentage(req, res);
-});
-app.get("/users/:id", (req: Request, res: Response) => {
-  Controllers.userController.getUser(req, res);
-});
-app.get("/users", (req: Request, res: Response) => {
-  Controllers.userController.getAllUser(req, res);
-});
-
-app.get("/auth", async (req: Request, res: Response) => {
-  Controllers.octokitController.getAuthenticated(req, res);
-});
-
-app.get("/issues", async (req: Request, res: Response) => {
-  Controllers.octokitController.getRepoIssues(req, res);
+// Catch-all route
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
-app.listen(PORT, () => {
-  console.info("SERVER STARTED AT:", PORT);
-});
+// Global error handling middleware
+app.use(Middlewares.error);
+
+// Server initialization
+const startServer = async () => {
+  try {
+    console.log("Connecting to db...");
+    db.connection();
+    console.log("DB connected successfully...");
+    app.listen(PORT, () => {
+      console.info(`Server started at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start the server", error);
+    process.exit(1);
+  }
+};
+
+startServer();
