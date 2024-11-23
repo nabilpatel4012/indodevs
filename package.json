@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Indodevs is a platform which enables developers to contribute to opensource projects and make the opensource space in India more accessible and user friendly for new Developers in India. It also enables users get compensated for the work/contributions and allow organizations/developers to setup bounties for developers. #indodevs",
   "main": "src/app.ts",
+  "type": "module",
   "scripts": {
     "start": "tsx --watch src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
