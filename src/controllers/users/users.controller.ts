@@ -134,4 +134,32 @@ export class UserController {
       throw error; // Forward to error middleware
     }
   }
+
+  /**
+   * Retrieves the number of records of users.
+   * @param {Request} req - The HTTP request object.
+   * @param {Response} res - The HTTP response object.
+   * @returns {Promise<Response>} The response containing the gender percentages.
+   */
+  static async getUsersCount(req: Request, res: Response) {
+    try {
+      const response = await Services.userService.getUsersCount();
+      return res
+        .status(200)
+        .json(formatResponse("success", response, "Count success."));
+    } catch (error) {
+      if (error instanceof Error) {
+        return res
+          .status(500)
+          .json(
+            formatResponse(
+              "error",
+              null,
+              error.message || "Internal Server Error"
+            )
+          );
+      }
+      throw error; // Forward to error middleware
+    }
+  }
 }

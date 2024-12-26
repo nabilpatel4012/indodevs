@@ -10,4 +10,8 @@ userRoutes.get(
   "/stats",
   asyncHandler(Controllers.userController.getUserGenderPercentage)
 );
+userRoutes.get(
+  "/count",
+  asyncHandler(Controllers.userController.getUsersCount)
+);
 userRoutes.get("/:id", asyncHandler(Controllers.userController.getUser));

@@ -86,4 +86,23 @@ export class UserService {
       percentage: (Number(row.count) / totalCount) * 100,
     }));
   }
+
+  /**
+   * Calculates the count of users.
+   * @returns {Promise<any[]>} A list the count of users present.
+   */
+  static async getUsersCount() {
+    // Retrieve the total number of users
+    const totalCountResult = await db
+      .selectFrom("person")
+      .select(db.fn.count("id").as("total"))
+      .executeTakeFirstOrThrow();
+
+    const totalCount = Number(totalCountResult.total);
+    if (totalCount === 0) {
+      return 0;
+    }
+    // Calculate the percentage for each gender
+    return totalCount;
+  }
 }
